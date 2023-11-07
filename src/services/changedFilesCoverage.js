@@ -12,6 +12,8 @@ const getChangedFilesCoverage = async (coverage) => {
   const octokit = await getOctokit();
 
   const { repo, owner, pullNumber } = pullRequestContext;
+  core.info(`PullRequestContext ${repo}, ${owner}, ${pullNumber}`);
+  
   const changedFiles = await githubApi.getChangedFiles(octokit, {
     repo,
     owner,
