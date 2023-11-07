@@ -38,7 +38,7 @@ inputs:
     required: false
   workspace-path:
     description: "Workspace path for mono repos"
-    default: ""
+    default: "./"
     required: false
   
 outputs:
