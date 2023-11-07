@@ -1,4 +1,4 @@
-const { githubApi } = require("@barecheck/core");
+const { githubApi, info } = require("@barecheck/core");
 const path = require("path");
 
 const { getPullRequestContext, getOctokit } = require("../lib/github");
@@ -8,21 +8,21 @@ const getChangedFilesCoverage = async (coverage) => {
   const pullRequestContext = getPullRequestContext();
 
   if (!pullRequestContext) {
-    core.info(`NO PullRequestContext`);
+    info(`NO PullRequestContext`);
     return coverage.data;
   }
 
   const octokit = await getOctokit();
 
   const { repo, owner, pullNumber } = pullRequestContext;
-  core.info(`PullRequestContext ${repo}, ${owner}, ${pullNumber}`);
+  info(`PullRequestContext ${repo}, ${owner}, ${pullNumber}`);
   
   const changedFiles = await githubApi.getChangedFiles(octokit, {
     repo,
     owner,
     pullNumber
   });
-  core.info(`Changed files ${changedFiles}`);
+  info(`Changed files ${changedFiles}`);
 
   const workspacePath = getWorkspacePath();
   const changedFilesCoverage = coverage.data.reduce(
