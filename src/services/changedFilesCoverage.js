@@ -33,7 +33,7 @@ const getChangedFilesCoverage = async (coverage) => {
 
       const changedFile = changedFiles.find(
         ({ filename }) => {
-          core.info(`Got Changed File ${filename}`);
+          core.info(`Got Changed File ${filename}, - ${filePath} = ${filename === filePath}`);
           return filename === filePath;
         }
       );
@@ -52,6 +52,8 @@ const getChangedFilesCoverage = async (coverage) => {
     },
     []
   );
+  core.info(`Result ${changedFilesCoverage}`);
+
 
   return changedFilesCoverage;
 };
