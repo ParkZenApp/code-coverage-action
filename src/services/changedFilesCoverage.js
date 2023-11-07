@@ -17,6 +17,7 @@ const getChangedFilesCoverage = async (coverage) => {
     owner,
     pullNumber
   });
+  core.info(`Changed files ${changedFiles}`);
 
   const workspacePath = getWorkspacePath();
   const changedFilesCoverage = coverage.data.reduce(
