@@ -1,3 +1,4 @@
+const core = require("@actions/core");
 const github = require("@actions/github");
 const { githubApi } = require("@barecheck/core");
 
@@ -41,11 +42,18 @@ const getCurrentRefSha = () => {
 };
 
 const getOctokit = async () => {
-  if (!octokit)
-    octokit = await githubApi.createOctokitClient(
-      getBarecheckGithubAppToken(),
-      getGithubToken()
-    );
+  if (!octokit) {
+    try {
+      octokit = await githubApi.createOctokitClient(
+        getBarecheckGithubAppToken(),
+        getGithubToken()
+      );
+      core.info(`Octokit ${octokit}`);
+    } catch(err) {
+      core.info(`Got error ${err}`);
+      return octokit;
+    }
+  }
 
   return octokit;
 };
