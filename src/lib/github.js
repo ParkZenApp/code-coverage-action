@@ -43,16 +43,10 @@ const getCurrentRefSha = () => {
 
 const getOctokit = async () => {
   if (!octokit) {
-    try {
-      octokit = await githubApi.createOctokitClient(
-        getBarecheckGithubAppToken(),
-        getGithubToken()
-      );
-      core.info(`Octokit ${octokit}`);
-    } catch(err) {
-      core.info(`Got error ${err}`);
-      return octokit;
-    }
+    octokit = await githubApi.createOctokitClient(
+      getBarecheckGithubAppToken(),
+      getGithubToken()
+    );
   }
 
   return octokit;
